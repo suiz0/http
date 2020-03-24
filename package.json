@@ -1,0 +1,33 @@
+{
+  "name": "vue-http",
+  "version": "1.0.0",
+  "description": "vuejs axios jquery like plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suiz0/vue-http.git"
+  },
+  "keywords": [
+    "vue",
+    "js",
+    "http",
+    "plugin"
+  ],
+  "author": "cesar iduarte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suiz0/vue-http/issues"
+  },
+  "homepage": "https://github.com/suiz0/vue-http#readme",
+  "devDependencies": {
+    "jasmine": "^3.5.0",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}
