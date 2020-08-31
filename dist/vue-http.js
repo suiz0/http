@@ -12,13 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.$post = exports.$get = exports.$ajaxSetup = exports.vHttp = void 0;
     const axios_1 = __importDefault(require("axios"));
     class VueHttp {
-        constructor(config) {
+        constructor(config, axios) {
             this.config = {
                 method: 'get'
             };
-            this.http = axios_1.default.create(config);
+            this.http = axios.create(config);
         }
         ajax(url, config) {
             var conf = this.parseOptions(config);
@@ -39,7 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         },
         getInstance() {
             if (this.instance === null) {
-                this.instance = new VueHttp(this.config);
+                this.instance = new VueHttp(this.config, axios_1.default);
             }
             return this.instance;
         }

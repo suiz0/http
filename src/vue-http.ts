@@ -7,7 +7,7 @@ class VueHttp {
 
     http: AxiosInstance;
 
-    constructor(config)
+    constructor(config, axios)
     {
         this.http = axios.create(config);
     }
@@ -36,7 +36,7 @@ let ajaxSetup: {instance: VueHttp| null, config: Object, set: Function, getInsta
     getInstance() {
         if(this.instance === null)
         {
-            this.instance = new VueHttp(this.config);
+            this.instance = new VueHttp(this.config, axios);
         }
 
         return this.instance;

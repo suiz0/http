@@ -1,16 +1,10 @@
-var ajaxSettings = require('../dist/vue-http.js').$ajaxSetup;
+let ajaxSetup = require('../dist/vue-http.js').$ajaxSetup;
 const get = require('../dist/vue-http.js').$get;
 
 describe('setGlobals', function() {
-    it('preserves settings', function(done) {
-       ajaxSettings.set({baseURL:"https://jsonplaceholder.typicode.com"});
-
-       get('posts')
-       .then((response) => {
-           done();
-           expect(response).toBeDefined();
-           expect(response.data).toBeDefined();
-       });
+    it('preserves settings', function() {
+        ajaxSetup.set({baseURL:"https://jsonplaceholder.typicode.com"});
+        expect(ajaxSetup.config.baseURL).toEqual("https://jsonplaceholder.typicode.com");
     });
 });
 
