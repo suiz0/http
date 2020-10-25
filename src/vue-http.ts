@@ -7,7 +7,7 @@ class VueHttp {
 
     http: AxiosInstance;
 
-    constructor(config, axios)
+    constructor(config)
     {
         this.http = axios.create(config);
     }
@@ -23,36 +23,41 @@ class VueHttp {
     }
 }
 
-
-let ajaxSetup: {instance: VueHttp| null, config: Object, set: Function, getInstance: Function } = {
+let HttpSingletonFactory: {instance: VueHttp| null, config: Object, setConfig: Function, getInstance: Function } = {
     instance: null,
     config: {
         method: 'get'
     },
-    set(config) {
+    setConfig(config) {
         this.config = config;
         this.instance = null;
     },
     getInstance() {
         if(this.instance === null)
         {
-            this.instance = new VueHttp(this.config, axios);
+            this.instance = new VueHttp(this.config);
         }
 
         return this.instance;
     }
 }
 
+// facade for ajaxSetup
+function ajaxSetup(config) {
+    HttpSingletonFactory.setConfig(config);
+    return HttpSingletonFactory.config;
+}
+
 // facade for get request
 function get(url: string, config) 
 {
-    return ajaxSetup.getInstance().ajax(url, Object.assign({method: 'get'}, config));
+    return HttpSingletonFactory.getInstance().ajax(url, config);
 }
 
 // facade for post request
 function post(url: string, config) 
 {
-    return ajaxSetup.getInstance().ajax(url, Object.assign({method: 'post'}, config));
+    return HttpSingletonFactory.getInstance().ajax(url, Object.assign({method: 'post'}, config));
 }
 
 export let vHttp = VueHttp;

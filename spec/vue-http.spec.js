@@ -3,8 +3,8 @@ const get = require('../dist/vue-http.umd.js').$get;
 
 describe('setGlobals', function() {
     it('preserves settings', function() {
-        ajaxSetup.set({baseURL:"https://jsonplaceholder.typicode.com"});
-        expect(ajaxSetup.config.baseURL).toEqual("https://jsonplaceholder.typicode.com");
+        let config = ajaxSetup({baseURL:"https://jsonplaceholder.typicode.com"});
+        expect(config.baseURL).toEqual("https://jsonplaceholder.typicode.com");
     });
 });
 
