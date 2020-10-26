@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
-class VueHttp {
+class HttpClient {
     config = {
         method: 'get'
     };
@@ -23,7 +23,7 @@ class VueHttp {
     }
 }
 
-let HttpSingletonFactory: {instance: VueHttp| null, config: Object, setConfig: Function, getInstance: Function } = {
+let HttpSingletonFactory: {instance: HttpClient | null, config: Object, setConfig: Function, getInstance: Function } = {
     instance: null,
     config: {
         method: 'get'
@@ -35,7 +35,7 @@ let HttpSingletonFactory: {instance: VueHttp| null, config: Object, setConfig: F
     getInstance() {
         if(this.instance === null)
         {
-            this.instance = new VueHttp(this.config);
+            this.instance = new HttpClient(this.config);
         }
 
         return this.instance;
@@ -60,7 +60,7 @@ function post(url: string, config)
     return HttpSingletonFactory.getInstance().ajax(url, Object.assign({method: 'post'}, config));
 }
 
-export let vHttp = VueHttp;
+export let $http = HttpClient;
 export let $ajaxSetup = ajaxSetup;
 export let $get = get; 
 export let $post = post;
