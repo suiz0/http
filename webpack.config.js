@@ -3,7 +3,7 @@ const path =  require('path');
 module.exports = {
     target: 'node',
     externals: ['axios'],
-    entry: {'vue-http': './src/vue-http.ts'},
+    entry: {'vue-http': './src/index.ts'},
     mode: 'production',
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -12,6 +12,9 @@ module.exports = {
         library: 'vHttp',
         umdNamedDefine: true,
         globalObject: 'this'
+    },
+    resolve: {
+        extensions: ['.ts', '.js'] //Webpack does not look for .ts files by default. 
     },
     module: {
         rules: [{
