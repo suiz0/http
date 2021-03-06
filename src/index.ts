@@ -1,7 +1,6 @@
 import HttpClient from './http-client';
 import Factory from './factory';
 
-
 // facade for ajaxSetup
 function ajaxSetup(config) {
     Factory.getInstance(config);
@@ -19,6 +18,15 @@ function post(url: string, data, config)
 {
     return Factory.getInstance().ajax(url, Object.assign({method: 'post', 'data': data}, config));
 }
+
+// vue plugin def
+export let vHttp = {
+    install: function(vue, options?) {
+        vue.$ajaxSetup = ajaxSetup;
+        vue.$get = get;
+        vue.$post = post;
+    }
+};
 
 export let $http = HttpClient;
 export let $ajaxSetup = ajaxSetup;
