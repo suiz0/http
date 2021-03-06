@@ -1,6 +1,6 @@
 {
   "name": "vue-http",
-  "version": "1.0.0",
+  "version": "0.0.3",
   "description": "vuejs axios jquery like plugin",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,7 @@
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",
     "jasmine": "^3.5.0",
+    "nock": "^13.0.10",
     "typescript": "^3.8.3",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"

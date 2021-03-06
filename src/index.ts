@@ -15,9 +15,9 @@ function get(url: string, config)
 }
 
 // facade for post request
-function post(url: string, config) 
+function post(url: string, data, config) 
 {
-    return Factory.getInstance().ajax(url, Object.assign({method: 'post'}, config));
+    return Factory.getInstance().ajax(url, Object.assign({method: 'post', 'data': data}, config));
 }
 
 export let $http = HttpClient;
