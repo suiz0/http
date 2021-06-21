@@ -19,12 +19,19 @@ function post(url: string, data, config)
     return Factory.getInstance().ajax(url, Object.assign({method: 'post', 'data': data}, config));
 }
 
+function del(url: string, config)
+{
+    return Factory.getInstance().ajax(url, Object.assign({method: 'delete'}, config));
+}
+
+
 // vue plugin def
 export let vHttp = {
     install: function(vue, options?) {
         vue.$ajaxSetup = ajaxSetup;
         vue.$get = get;
         vue.$post = post;
+        vue.$del = del;
     }
 };
 
@@ -32,3 +39,4 @@ export let $http = HttpClient;
 export let $ajaxSetup = ajaxSetup;
 export let $get = get; 
 export let $post = post;
+export let $del = del;

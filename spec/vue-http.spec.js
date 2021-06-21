@@ -54,3 +54,58 @@ describe('POST resources', function() {
         nock.cleanAll();
     });
 });
+
+describe('DELETE resources', function() {
+    var scope;
+    beforeAll(function() {
+       scope =  nock('https://jsonplaceholder.typicode.com')
+        .delete('/posts/1')
+        .reply(200);
+
+        scope.delete('/posts/2')
+        .reply(200);
+    });
+
+    it('sends delete request successfully', function(done) {
+        vHttp.$del('https://jsonplaceholder.typicode.com/posts/1')
+        .then(function(response) {
+            expect(response).toBeDefined();
+            expect(response.status).toBeDefined();
+            expect(response.status).toEqual(200);
+
+            done();
+        });
+    });
+
+    it('honors headers', function(done) {
+        vHttp.$del('https://jsonplaceholder.typicode.com/posts/2', {
+            headers: {
+                'Authorization': 'Basic YWxhZGRpbjpvcGVuc2VzYW1l'
+            }
+        })
+        .then(function(response) {
+            expect(response).toBeDefined();
+            expect(response.status).toBeDefined();
+            expect(response.status).toEqual(200);
+
+            expect(response.config.headers.Authorization).toBeDefined();
+            expect(response.config.headers.Authorization).toEqual('Basic YWxhZGRpbjpvcGVuc2VzYW1l');
+            done();
+        });
+    });
+
+    it('catches error when request fails', function(done) {
+        vHttp.$del('https://jsonplaceholder.typicode.com/posts/3')
+        .catch(function(response) {
+            expect(response).toBeDefined();
+            expect(response.status).toBeDefined();
+            expect(response.status).toEqual(404);
+
+            done();
+        });
+    });
+
+    afterAll(function() {
+        nock.cleanAll();
+    });
+});

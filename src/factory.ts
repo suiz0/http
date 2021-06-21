@@ -12,8 +12,7 @@ const HttpSingletonFactory = (function() {
             return instance? instance.settings : null;
         },
         getInstance: function(config?) {
-            if(!instance || config)
-            {
+            if(!instance || config) {
                 instance = init(config);
             }
 
