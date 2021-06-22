@@ -1,6 +1,6 @@
 {
   "name": "vue-http",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "vuejs axios jquery like plugin",
   "main": "index.js",
   "scripts": {
@@ -33,6 +33,6 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.21.1"
   }
 }
