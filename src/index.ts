@@ -36,7 +36,7 @@ function put(url: string, data, config)
 
 
 // vue plugin def
-export let vHttp = {
+export let plugin = {
     install: function(vue, options?) {
         vue.$ajaxSetup = ajaxSetup;
         vue.$get = get;
