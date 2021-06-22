@@ -16,12 +16,22 @@ function get(url: string, config)
 // facade for post request
 function post(url: string, data, config) 
 {
-    return Factory.getInstance().ajax(url, Object.assign({method: 'post', 'data': data}, config));
+    return Factory.getInstance().ajax(url, Object.assign(config || {}, {method: 'post', 'data': data}));
 }
 
 function del(url: string, config)
 {
-    return Factory.getInstance().ajax(url, Object.assign({method: 'delete'}, config));
+    return Factory.getInstance().ajax(url, Object.assign(config || {}, {method: 'delete'}));
+}
+
+function put(url: string, data, config) 
+{
+    let options = {
+        method: 'put',
+        data: data
+    };
+
+    return Factory.getInstance().ajax(url, Object.assign(config || {}, options));
 }
 
 
@@ -32,6 +42,7 @@ export let vHttp = {
         vue.$get = get;
         vue.$post = post;
         vue.$del = del;
+        vue.$put = put;
     }
 };
 
@@ -40,3 +51,4 @@ export let $ajaxSetup = ajaxSetup;
 export let $get = get; 
 export let $post = post;
 export let $del = del;
+export let $put = put;

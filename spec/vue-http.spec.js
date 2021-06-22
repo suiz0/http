@@ -77,7 +77,7 @@ describe('DELETE resources', function() {
         });
     });
 
-    it('honors headers', function(done) {
+    it('honors custom headers', function(done) {
         vHttp.$del('https://jsonplaceholder.typicode.com/posts/2', {
             headers: {
                 'Authorization': 'Basic YWxhZGRpbjpvcGVuc2VzYW1l'
@@ -101,6 +101,61 @@ describe('DELETE resources', function() {
             expect(response.status).toBeDefined();
             expect(response.status).toEqual(404);
 
+            done();
+        });
+    });
+
+    afterAll(function() {
+        nock.cleanAll();
+    });
+});
+
+describe('PUT resources', function() {
+    beforeAll(function() {
+        scope =  nock('https://jsonplaceholder.typicode.com')
+        .put('/posts/3', {
+            ...response.put.update
+        })
+        .reply(200, {
+            ...response.put.update
+        });
+
+        scope.put('/posts/3', {
+            ...response.put.update
+        }, {
+            'Location': 'index.html'
+        })
+        .reply(200);
+
+    });
+
+    it('sends request succesfully', function(done) {
+        let obj = {
+            ...response.get.posts[1]
+        };
+
+        obj.description = 'Desc update';
+        vHttp.$put('https://jsonplaceholder.typicode.com/posts/3', obj)
+        .then( response => {
+            expect(response).toBeDefined();
+            expect(response.status).toEqual(200);
+            expect(response.data).toBeDefined();
+            done();
+        });
+    });
+
+    it('honors custom headers', function(done) {
+        let obj = {
+            ...response.get.posts[1]
+        };
+
+        obj.description = 'Desc update';
+        vHttp.$put('https://jsonplaceholder.typicode.com/posts/3', obj, {
+            'Location': 'index.html'
+        })
+        .then(response=> {
+            expect(response).toBeDefined();
+            expect(response.status).toEqual(200);
             done();
         });
     });

@@ -20,7 +20,16 @@ let response = {
     post: {
         new: {
             id: 4,
-            description: '',
+            description: 'New Post',
+            user: 'user 3',
+            userid:3
+        }
+    },
+    put: {
+        update: {
+            id:3,
+            description: 'Desc update',
+            created: '02.23.2021',
             user: 'user 3',
             userid:3
         }
