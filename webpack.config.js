@@ -1,7 +1,7 @@
 const path =  require('path');
 
 module.exports = {
-    target: 'node',
+    target: 'web',
     externals: ['axios'],
     entry: {'vue-http': './src/index.ts'},
     mode: 'production',
