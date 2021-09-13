@@ -3,8 +3,7 @@ import Factory from './factory';
 
 // facade for ajaxSetup
 function ajaxSetup(config) {
-    Factory.getInstance(config);
-    return Factory.getConfig();
+    return Factory.getInstance(config);
 }
 
 // facade for get request

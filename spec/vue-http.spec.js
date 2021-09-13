@@ -5,8 +5,8 @@ let response = require('./javascripts/helpers/responses');
 describe('setGlobals', function() {
     const ajaxSetup = require('../dist/vue-http.umd.js').$ajaxSetup;
     it('preserves settings', function() {
-        let config = vHttp.$ajaxSetup({baseURL:"https://jsonplaceholder.typicode.com"});
-        expect(config.baseURL).toEqual("https://jsonplaceholder.typicode.com");
+        const http = vHttp.$ajaxSetup({baseURL:"https://jsonplaceholder.typicode.com"});
+        expect(http.settings.baseURL).toEqual("https://jsonplaceholder.typicode.com");
     });
 });
 
