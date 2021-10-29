@@ -10,6 +10,7 @@ module.exports = {
         filename: '[name].umd.js',
         libraryTarget: 'umd',
         library: 'vHttp',
+        libraryExport: 'default',
         umdNamedDefine: true,
         globalObject: 'this'
     },

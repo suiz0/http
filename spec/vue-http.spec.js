@@ -1,23 +1,30 @@
-let vHttp = require('../dist/vue-http.umd.js');
-let nock = require('nock');
-let response = require('./javascripts/helpers/responses');
+const vHttp = require('../dist/vue-http.umd.js');
+const nock = require('nock');
+const response = require('./javascripts/helpers/responses');
 
-describe('setGlobals', function() {
-    const ajaxSetup = require('../dist/vue-http.umd.js').$ajaxSetup;
+let vueMock;
+
+beforeEach(() => {
+    const vHttp = require('../dist/vue-http.umd.js');
+    vueMock = function() {};
+    vHttp.install(vueMock);
+});
+
+describe('setGlobals test', function() {
     it('preserves settings', function() {
-        const http = vHttp.$ajaxSetup({baseURL:"https://jsonplaceholder.typicode.com"});
+        const http = vueMock.ajaxSetup({baseURL:"https://jsonplaceholder.typicode.com"});
         expect(http.settings.baseURL).toEqual("https://jsonplaceholder.typicode.com");
     });
 });
 
-describe('GET resources', function() {
+describe('GET resources tests', function() {
     it('requests resource list and returns a success response', function(done) {
-
+        const vueInstanceMock = new vueMock();
         nock('https://jsonplaceholder.typicode.com')
         .get('/posts')
         .reply(200, response.get.posts);
 
-        vHttp.$get('https://jsonplaceholder.typicode.com/posts')
+        vueInstanceMock.$get('https://jsonplaceholder.typicode.com/posts')
         .then((response) => {
             expect(response).toBeDefined();
             expect(response.data).toBeDefined();
@@ -31,15 +38,16 @@ describe('GET resources', function() {
     });
 });
 
-describe('POST resources', function() {
+describe('POST resources tests', function() {
     it('sends body content and returns a success response', function(done) {
+        const vueInstanceMock = new vueMock();
         nock('https://jsonplaceholder.typicode.com')
         .post('/posts', {
             'description': 'New Post'
         })
         .reply(200, response.post.new);
 
-        vHttp.$post('https://jsonplaceholder.typicode.com/posts', {
+        vueInstanceMock.$post('https://jsonplaceholder.typicode.com/posts', {
             'description': 'New Post'
         })
         .then(function(response) {
@@ -55,10 +63,11 @@ describe('POST resources', function() {
     });
 });
 
-describe('DELETE resources', function() {
-    var scope;
+describe('DELETE resources tests', function() {
+    let vueInstanceMock;
+
     beforeAll(function() {
-       scope =  nock('https://jsonplaceholder.typicode.com')
+       const scope = nock('https://jsonplaceholder.typicode.com')
         .delete('/posts/1')
         .reply(200);
 
@@ -66,8 +75,12 @@ describe('DELETE resources', function() {
         .reply(200);
     });
 
+    beforeEach(() => {
+        vueInstanceMock = new vueMock();
+    });
+
     it('sends delete request successfully', function(done) {
-        vHttp.$del('https://jsonplaceholder.typicode.com/posts/1')
+        vueInstanceMock.$del('https://jsonplaceholder.typicode.com/posts/1')
         .then(function(response) {
             expect(response).toBeDefined();
             expect(response.status).toBeDefined();
@@ -78,7 +91,7 @@ describe('DELETE resources', function() {
     });
 
     it('honors custom headers', function(done) {
-        vHttp.$del('https://jsonplaceholder.typicode.com/posts/2', {
+        vueInstanceMock.$del('https://jsonplaceholder.typicode.com/posts/2', {
             headers: {
                 'Authorization': 'Basic YWxhZGRpbjpvcGVuc2VzYW1l'
             }
@@ -95,7 +108,7 @@ describe('DELETE resources', function() {
     });
 
     it('catches error when request fails', function(done) {
-        vHttp.$del('https://jsonplaceholder.typicode.com/posts/3')
+        vueInstanceMock.$del('https://jsonplaceholder.typicode.com/posts/3')
         .catch(function(response) {
             expect(response).toBeDefined();
             expect(response.status).toBeDefined();
@@ -110,9 +123,11 @@ describe('DELETE resources', function() {
     });
 });
 
-describe('PUT resources', function() {
+describe('PUT resources tests', function() {
+    let vueInstanceMock;
+
     beforeAll(function() {
-        scope =  nock('https://jsonplaceholder.typicode.com')
+        const scope =  nock('https://jsonplaceholder.typicode.com')
         .put('/posts/3', {
             ...response.put.update
         })
@@ -129,13 +144,17 @@ describe('PUT resources', function() {
 
     });
 
+    beforeEach(() => {
+        vueInstanceMock = new vueMock();
+    });
+
     it('sends request succesfully', function(done) {
         let obj = {
             ...response.get.posts[1]
         };
 
         obj.description = 'Desc update';
-        vHttp.$put('https://jsonplaceholder.typicode.com/posts/3', obj)
+        vueInstanceMock.$put('https://jsonplaceholder.typicode.com/posts/3', obj)
         .then( response => {
             expect(response).toBeDefined();
             expect(response.status).toEqual(200);
@@ -150,10 +169,10 @@ describe('PUT resources', function() {
         };
 
         obj.description = 'Desc update';
-        vHttp.$put('https://jsonplaceholder.typicode.com/posts/3', obj, {
+        vueInstanceMock.$put('https://jsonplaceholder.typicode.com/posts/3', obj, {
             'Location': 'index.html'
         })
-        .then(response=> {
+        .then(response => {
             expect(response).toBeDefined();
             expect(response.status).toEqual(200);
             done();
