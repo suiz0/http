@@ -8,10 +8,12 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].umd.js',
-        libraryTarget: 'umd',
-        library: 'vHttp',
-        libraryExport: 'default',
-        umdNamedDefine: true,
+        library: {
+            type: 'umd',
+            name: 'vHttp',
+            export: 'default',
+            umdNamedDefine: true
+        },
         globalObject: 'this'
     },
     resolve: {
