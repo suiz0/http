@@ -1,4 +1,3 @@
-const vHttp = require('../dist/vue-http.umd.js');
 const nock = require('nock');
 const response = require('./javascripts/helpers/responses');
 

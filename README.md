@@ -8,11 +8,9 @@ vuejs jQuery-like ajax facade plugin for axios library
 The library can be used as a vuejs plugin:
 
 ```javascript
-Vue.use(vHttp.plugin);
+import vHttp from  'vue-http';
+Vue.use(vHttp);
 ```
-
-or as an stand-alone component since the library is also available in the global scope
-
 ## API
 ---
 
