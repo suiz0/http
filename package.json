@@ -1,12 +1,13 @@
 {
   "name": "vue-http",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "vuejs axios jquery like plugin",
   "main": "index.js",
   "scripts": {
     "test": "jasmine",
     "build": "webpack",
-    "build:dev": "webpack --config webpack.config.dev.js"
+    "build:dev": "webpack --config webpack.config.dev.js",
+    "prettier:fix": "prettier write ."
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "awesome-typescript-loader": "^5.2.1",
     "jasmine": "^3.10.0",
     "nock": "^13.0.10",
+    "prettier": "^2.6.2",
     "typescript": "^3.8.3",
     "webpack": "^5.62.1",
     "webpack-cli": "^4.9.1"

@@ -1,0 +1,8 @@
+# Ignore artifacts:
+dist
+
+# Ignore files:
+*.html
+package.json
+package-lock.json
+tsconfig.json

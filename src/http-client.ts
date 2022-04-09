@@ -4,7 +4,7 @@ class HttpClient {
     private http: AxiosInstance;
 
     public static defaultSettings = {
-        method: 'get'
+        method: 'get',
     };
 
     public settings: any;
